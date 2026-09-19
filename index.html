@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NERT组件测试沙箱</title>
+  
+  <!-- 引入 Element UI 的样式文件 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* 布局容器全屏高度 */
+    .app-container {
+      height: 100vh;
+    }
+
+    /* 头部样式 */
+    .el-header {
+      background-color: hwb(208 7% 13%);
+      color: rgb(223, 9, 9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+      z-index: 10;
+    }
+    
+    .header-logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* 侧边栏样式 */
+    .el-aside {
+      background-color: #eeecec;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, .05);
+    }
+    
+    .el-menu {
+      border-right: none; /* 移除默认边框让侧边栏更干净 */
+    }
+
+    /* 主内容区样式 */
+    .el-main {
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+
+    /* 测试沙箱容器样式 */
+    .sandbox-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      min-height: calc(100vh - 140px);
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .sandbox-title {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #303133;
+      border-bottom: 1px solid #ebeef5;
+      padding-bottom: 10px;
+    }
+
+    /* 用于演示 Layout 布局的辅助样式，对应您截图中的颜色 */
+    .bg-purple-dark { background: #99a9bf; }
+    .bg-purple { background: #d3dce6; }
+    .bg-purple-light { background: #e5e9f2; }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <el-container class="app-container">
+      
+      <!-- 顶部 Header -->
+      <el-header height="60px">
+        <div class="header-logo">
+          <i class="el-icon-eleme" style="margin-right: 8px;"></i> SimuPro 页面构建
+        </div>
+        <div>
+          <el-avatar size="small" icon="el-icon-user-solid"></el-avatar>
+        </div>
+      </el-header>
+      
+      <el-container>
+        <!-- 左侧 Sidebar -->
+        <el-aside width="200px">
+          <el-menu default-active="1">
+            <el-menu-item index="1">
+              <i class="el-icon-menu"></i>
+              <span slot="title">组件沙箱</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <i class="el-icon-document"></i>
+              <span slot="title">文档说明</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <i class="el-icon-setting"></i>
+              <span slot="title">设置</span>
+            </el-menu-item>
+          </el-menu>
+        </el-aside>
+        
+        <!-- 右侧 Main Content -->
+        <el-main>
+          <div class="sandbox-container">
+            <h2 class="sandbox-title">UI</h2>
+                   
+    <div>
+      <Button>默认按钮</Button>
+      <Button type="primary">主要按钮</Button>
+      <Button type="text">文字按钮</Button>
+    </div>
+
+              <!-- 下面是您之前截图中看到的 Layout 布局演示 -->
+              <el-row>
+                <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+              </el-row>
+        
+              <el-row :gutter="20">
+                <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
+                <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
+              </el-row>
+
+              <el-row :gutter="20">
+                <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
+                <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
+                <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
+              </el-row>
+
+              <!-- 其他组件演示 -->
+              <div style="margin-top: 30px;">
+                <el-button type="primary">主要按钮</el-button>
+                <el-button type="success">成功按钮</el-button>
+                <el-button type="warning">警告按钮</el-button>
+                <el-button type="danger">危险按钮</el-button>
+              </div>
+
+            </div>
+            <!-- ========================================================= -->
+
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+
+  <!-- 必须先引入 Vue (推荐使用 Vue 2) -->
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <!-- 然后引入 Element UI 组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  
+  <script>
+    // 初始化 Vue 实例，接管 #app 区域
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+          // 这里可以定义组件需要用到的数据变量
+          message: 'Hello Element UI!'
+        }
+      },
+      methods: {
+        // 这里可以定义按钮点击等交互方法
+        handleClick() {
+          this.$message.success('按钮被点击了！');
+        }
+      }
+    })
+  </script>
+</body>
+</html>
